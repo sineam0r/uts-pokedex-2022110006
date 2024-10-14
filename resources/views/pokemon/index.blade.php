@@ -14,9 +14,6 @@
 
     <div class="container mt-5 rounded shadow-lg bg-white p-3">
         <div class="row mb-3">
-            <div class="col">
-                <p class="text-muted fs-5">Total Pokemon: {{ $pokemons->count() }}</p>
-            </div>
             <div class="col text-end">
                 <form action="{{ route('pokemon.index') }}" method="GET">
                     <div class="input-group">
@@ -40,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pokemons as $pokemon)
+                {{-- @foreach ($pokemons as $pokemon)
                     <tr>
                         <td>{{ $pokemon->id }}</td>
                         <td>{{ $pokemon->name }}</td>
@@ -60,11 +57,11 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @endforeach --}}
             </tbody>
         </table>
         <div class="mt-5 d-flex justify-content-center">
-            {!! $pokemons->links('pagination::bootstrap-5') !!}
+            {{-- {!! $pokemons->links('pagination::bootstrap-5') !!} --}}
         </div>
     </div>
 @endsection
