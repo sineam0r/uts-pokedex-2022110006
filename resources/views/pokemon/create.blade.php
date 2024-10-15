@@ -157,7 +157,8 @@
             <div style="margin-top: 20px;"></div>
 
             <div class="form-check">
-                <input class="form-check-input @error('is_legendary') is-invalid @enderror" type="checkbox" id="is_legendary" name="is_legendary" {{old('is_legendary') ? 'checked' : ''}}>
+                <input type="hidden" name="is_legendary" value="0">
+                <input class="form-check-input @error('is_legendary') is-invalid @enderror" type="checkbox" id="is_legendary" name="is_legendary" value="1" {{ old('is_legendary') ? 'checked' : '' }}>
                 <label class="form-check-label" for="is_legendary">Legendary</label>
                 @error('is_legendary')
                     <span class="invalid-feedback" role="alert">
@@ -182,3 +183,4 @@
         </form>
     </div>
 @endsection
+

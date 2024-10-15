@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
 @section('title', 'Pokemon | UTS-Pokedex-2022110006')
 
-@section('body')
+@section('content')
     <div class="container p-3 rounded shadow-lg bg-white">
         <div class="d-flex justify-content-between align-items-center">
             <h1>Pokemon</h1>
@@ -13,18 +13,6 @@
     </div>
 
     <div class="container mt-5 rounded shadow-lg bg-white p-3">
-        <div class="row mb-3">
-            <div class="col text-end">
-                <form action="{{ route('pokemon.index') }}" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control fs-5" placeholder="Search Pokemon" value="{{ request()->query('search') }}">
-                        <button class="btn btn-primary fs-5" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
         <table class="table table-bordered table-hover mb-4 text-center">
             <thead class="table-dark">
                 <tr>
@@ -37,14 +25,17 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($pokemons as $pokemon)
+                @forelse ($pokemons as $pokemon)
                     <tr>
-                        <td>{{ $pokemon->id }}</td>
+                        <td>{{ $padded = Str::padLeft($pokemon->id , 4, '0'); }}</td>
                         <td>{{ $pokemon->name }}</td>
                         <td>{{ $pokemon->species }}</td>
                         <td>{{ $pokemon->primary_type }}</td>
-                        <td>{{ $pokemon->power }}</td>
+                        <td>{{ $pokemon->hp+ $pokemon->attack + $pokemon->defense }}</td>
                         <td>
+                            <a href="{{ route('pokemon.show', $pokemon->id) }}" class="btn btn-success">
+                                Detail
+                            </a>
                             <a href="{{ route('pokemon.edit', $pokemon->id) }}" class="btn btn-warning">
                                 Edit
                             </a>
@@ -57,11 +48,17 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach --}}
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center">No records found!</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+
+        {{-- Aktifkan pagination jika diperlukan --}}
         <div class="mt-5 d-flex justify-content-center">
-            {{-- {!! $pokemons->links('pagination::bootstrap-5') !!} --}}
+            {!! $pokemons->links('pagination::bootstrap-5') !!}
         </div>
     </div>
 @endsection

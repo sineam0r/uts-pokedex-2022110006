@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('primary_type',50);
             $table->decimal('weight', 8, 2)->default(0);
             $table->decimal('height', 8, 2)->default(0);
-            $table->integer('hp', 4)->default(0);
-            $table->integer('attack', 4)->default(0);
-            $table->integer('defense', 4)->default(0);
-            $table->boolean('is_legendary')->default(false);
-            $table->iamge('photo')->nullable();
+            $table->integer('hp')->default(0)->length(4);
+            $table->integer('attack')->default(0)->length(4);
+            $table->integer('defense')->default(0)->length(4);
+            $table->boolean('is_legendary')->default(0);
+            $table->string('photo')->nullable();
+            $table->timestamps();
         });
     }
 

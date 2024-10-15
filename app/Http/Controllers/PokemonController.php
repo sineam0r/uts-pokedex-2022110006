@@ -4,15 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PokemonController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('store');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $pokemons = Pokemon::paginate(20);
+        $pokemons = Pokemon::paginate(10); // misalnya 10 item per halaman
         return view('pokemon.index', compact('pokemons'));
     }
 
@@ -42,8 +53,13 @@ class PokemonController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
+        $validated['is_legendary'] = $request->has('is_legendary') ? true : false;
 
         $pokemon = Pokemon::create($validated);
+
+        if ($request->hasFile('photo')) {
+            $this->storeImage($pokemon, $request->file('photo'));
+        }
 
         return redirect()->route('pokemon.index')->with('success', 'Pokemon created successfully');
     }
@@ -84,6 +100,13 @@ class PokemonController extends Controller
 
         $pokemon->update($validated);
 
+        if ($request->hasFile('photo')) {
+            if ($pokemon->photo) {
+                Storage::delete($pokemon->photo);
+            }
+            $this->storeImage($pokemon, $request->file('photo'));
+        }
+
         return redirect()->route('pokemon.index')->with('success', 'Pokemon updated successfully');
     }
 
@@ -95,5 +118,11 @@ class PokemonController extends Controller
         $pokemon->delete();
 
         return redirect()->route('pokemon.index')->with('success', 'Pokemon deleted successfully');
+    }
+
+    private function storeImage(Pokemon $pokemon, $file)
+    {
+        $filePath = $file->store('public/pokemon');
+        $pokemon->update(['photo' => $filePath]);
     }
 }

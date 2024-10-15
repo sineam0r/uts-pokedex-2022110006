@@ -19,6 +19,6 @@ class Pokemon extends Model
         'attack',
         'defense',
         'is_legendary',
-        'photo'
+        'photo',
     ];
 }
