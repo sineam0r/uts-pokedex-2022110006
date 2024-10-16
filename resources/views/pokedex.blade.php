@@ -16,16 +16,16 @@
         <div class="row">
             @forelse ($pokemons as $pokemon)
                 <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{ asset('storage/' . Str::after($pokemon->photo, 'public/')) }}" class="card-img-top" alt="{{ $pokemon->name }}">
+                    <div class="card shadow-lg" style="border-radius: 15px">
+                        <img src="{{ asset('storage/' . Str::after($pokemon->photo, 'public/')) }}" class="card-img-top rounded-top" alt="{{ $pokemon->name }}" style="border-radius: 15px 15px 0 0">
                         <div class="card-body">
-                            <p class="card-text" style="text-align: left">
+                            <span class="card-text" style="text-align: left">
                                 #<strong>{{ Str::padLeft($pokemon->id, 4, '0') }}</strong>
-                            </p>
+                            </span>
                             <h5 class="card-title">
-                                <a href="{{ route('pokemon.show', $pokemon->id) }}" style="text-align: left">{{ $pokemon->name }}</a>
+                                <a href="{{ route('pokemon.show', $pokemon->id) }}" style="text-align: left; color: #333; text-decoration: none">{{ $pokemon->name }}</a>
                             </h5>
-                            <span class="badge rounded-pill {{ $pokemon->primary_type === 'Fire' ? 'bg-danger' : ($pokemon->primary_type === 'Water' ? 'bg-primary' : ($pokemon->primary_type === 'Grass' ? 'bg-success' : 'bg-secondary')) }}">{{ $pokemon->primary_type }}</span>
+                            <span class="badge rounded-pill bg-primary text-white" style="text-align: left">{{ $pokemon->primary_type }}</span>
                         </div>
                     </div>
                 </div>
