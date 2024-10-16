@@ -123,7 +123,7 @@ class PokemonController extends Controller
 
     private function storeImage(Pokemon $pokemon, $file)
     {
-        $filePath = $file->store('pokemon', 'public');
-        $pokemon->update(['photo' => $filePath]);
+        $filePath = $file->store('public');
+        $pokemon->update(['photo' => Storage::url($filePath)]);
     }
 }

@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Photo</th>
-                        <td><img src="{{ asset('storage/' . $pokemon->photo) }}" class="img-thumbnail w-25"></td>
+                        <td><img src="{{ asset('storage/' . Str::after($pokemon->photo, 'public/')) }}" alt="{{ $pokemon->name }}" /></td>
                     </tr>
                 </tbody>
             </table>

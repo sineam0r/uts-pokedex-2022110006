@@ -17,17 +17,15 @@
             @forelse ($pokemons as $pokemon)
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <a href="{{ route('pokemon.show', $pokemon->id) }}">
-                            <img src="{{ $pokemon->photo ? asset('storage/' . $pokemon->photo) : 'https://placehold.co/200' }}" class="card-img-top" alt="{{ $pokemon->name }}">
-                        </a>
+                        <img src="{{ asset('storage/' . Str::after($pokemon->photo, 'public/')) }}" class="card-img-top" alt="{{ $pokemon->name }}">
                         <div class="card-body">
+                            <p class="card-text" style="text-align: left">
+                                #<strong>{{ Str::padLeft($pokemon->id, 4, '0') }}</strong>
+                            </p>
                             <h5 class="card-title">
                                 <a href="{{ route('pokemon.show', $pokemon->id) }}" style="text-align: left">{{ $pokemon->name }}</a>
                             </h5>
-                            <p class="card-text" style="text-align: left">
-                                ID: <strong>{{ Str::padLeft($pokemon->id, 4, '0') }}</strong>
-                            </p>
-                            <span class="badge bg-primary" style="text-align: left">{{ $pokemon->primary_type }}</span>
+                            <span class="badge rounded-pill {{ $pokemon->primary_type === 'Fire' ? 'bg-danger' : ($pokemon->primary_type === 'Water' ? 'bg-primary' : ($pokemon->primary_type === 'Grass' ? 'bg-success' : 'bg-secondary')) }}">{{ $pokemon->primary_type }}</span>
                         </div>
                     </div>
                 </div>
@@ -42,5 +40,4 @@
         </div>
     </div>
 @endsection
-
 
