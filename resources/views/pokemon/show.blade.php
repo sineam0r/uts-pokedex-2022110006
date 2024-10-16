@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
 @section('title', 'Pokemon | UTS-Pokedex-2022110006')
 
-@section('body')
+@section('content')
     <div class="container p-3 rounded shadow-lg bg-white">
         <div class="card-header mb-3">
             <h3 class="card-title">Pokemon Details</h3>
@@ -12,7 +12,7 @@
                 <tbody>
                     <tr>
                         <th scope="row">ID</th>
-                        <td>{{$pokemon->id}}</td>
+                        <td>{{$padded = Str::padLeft($pokemon->id , 4, '0');}}</td>
                     </tr>
                     <tr>
                         <th scope="row">Name</th>
@@ -48,10 +48,15 @@
                     </tr>
                     <tr>
                         <th scope="row">Photo</th>
-                        <td><img src="{{ $pokemon->photo ? url('storage/' . $pokemon->photo) : asset('img/no-image.jpg') }}" class="img-thumbnail w-25"></td>
+                        <td><img src="{{ asset('storage/' . $pokemon->photo) }}" class="img-thumbnail w-25"></td>
                     </tr>
                 </tbody>
             </table>
+            <div class="mt-4">
+                <a href="{{ session('previous_url', route('pokemon.index')) }}" class="btn btn-secondary">
+                    Back
+                </a>
+            </div>
         </div>
     </div>
 @endsection

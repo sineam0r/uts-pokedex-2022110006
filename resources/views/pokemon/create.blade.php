@@ -1,8 +1,8 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
 @section('title', 'Pokemon | UTS-Pokedex-2022110006')
 
-@section('body')
+@section('content')
     <div class="container p-3 rounded shadow-lg bg-white">
         <h1>Create New Pokemon</h1>
     </div>

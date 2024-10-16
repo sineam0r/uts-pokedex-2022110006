@@ -15,7 +15,7 @@ class PokemonController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('store');
+        $this->middleware('auth')->except('show');
     }
 
     /**
@@ -53,7 +53,7 @@ class PokemonController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
-        $validated['is_legendary'] = $request->has('is_legendary') ? true : false;
+        $validated['is_legendary'] = $request->input('is_legendary', 0) ? true : false;
 
         $pokemon = Pokemon::create($validated);
 
@@ -69,6 +69,7 @@ class PokemonController extends Controller
      */
     public function show(Pokemon $pokemon)
     {
+        session(['previous_url' => url()->previous()]);
         return view('pokemon.show', compact('pokemon'));
     }
 
@@ -122,7 +123,7 @@ class PokemonController extends Controller
 
     private function storeImage(Pokemon $pokemon, $file)
     {
-        $filePath = $file->store('public/pokemon');
+        $filePath = $file->store('pokemon', 'public');
         $pokemon->update(['photo' => $filePath]);
     }
 }

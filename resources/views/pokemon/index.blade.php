@@ -5,10 +5,15 @@
 @section('content')
     <div class="container p-3 rounded shadow-lg bg-white">
         <div class="d-flex justify-content-between align-items-center">
-            <h1>Pokemon</h1>
-            <a href="{{ route('pokemon.create') }}" class="btn btn-primary">
-                Create New Pokemon
-            </a>
+            <h1 class="me-auto">Pokemon</h1>
+            <div class="d-flex">
+                <a href="{{ route('pokedex') }}" class="btn btn-secondary me-2">
+                    Back to Pokedex
+                </a>
+                <a href="{{ route('pokemon.create') }}" class="btn btn-primary">
+                    Create New Pokemon
+                </a>
+            </div>
         </div>
     </div>
 

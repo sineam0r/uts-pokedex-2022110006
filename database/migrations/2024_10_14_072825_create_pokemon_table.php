@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('hp')->default(0)->length(4);
             $table->integer('attack')->default(0)->length(4);
             $table->integer('defense')->default(0)->length(4);
-            $table->boolean('is_legendary')->default(0);
+            $table->boolean('is_legendary')->default(false);
             $table->string('photo')->nullable();
             $table->timestamps();
         });
