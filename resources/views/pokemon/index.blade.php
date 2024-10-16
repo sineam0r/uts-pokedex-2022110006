@@ -61,7 +61,6 @@
             </tbody>
         </table>
 
-        {{-- Aktifkan pagination jika diperlukan --}}
         <div class="mt-5 d-flex justify-content-center">
             {!! $pokemons->links('pagination::bootstrap-5') !!}
         </div>
