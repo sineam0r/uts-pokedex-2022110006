@@ -32,7 +32,7 @@
             <tbody>
                 @forelse ($pokemons as $pokemon)
                     <tr>
-                        <td>{{ $padded = Str::padLeft($pokemon->id , 4, '0'); }}</td>
+                        <td>#{{ $padded = Str::padLeft($pokemon->id , 4, '0'); }}</td>
                         <td>{{ $pokemon->name }}</td>
                         <td>{{ $pokemon->species }}</td>
                         <td>{{ $pokemon->primary_type }}</td>
